@@ -10,12 +10,21 @@ repositories {
 }
 
 dependencies {
+    // Esta es la que contiene el DocumentCollectionManager que te da error
     implementation 'org.eclipse.jnosql.databases:jnosql-mongodb:1.0.0'
-    implementation 'org.jboss.weld.se:weld-se-core:5.1.2.Final'
-    // Para leer la configuración
+
     implementation 'org.eclipse.microprofile.config:microprofile-config-api:3.1'
+    implementation 'org.jboss.weld.se:weld-se-core:5.1.2.Final'
+
+        // ... tus otras dependencias de JNoSQL y Weld
+
+        // Lombok (Para no escribir getters y setters a mano)
+        compileOnly 'org.projectlombok:lombok:1.18.30'
+        annotationProcessor 'org.projectlombok:lombok:1.18.30'
+
 }
 
 test {
     useJUnitPlatform()
 }
+
