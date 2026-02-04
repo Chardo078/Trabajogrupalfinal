@@ -23,6 +23,7 @@ dependencies {
     implementation 'org.eclipse.jnosql.databases:jnosql-mongodb:1.1.0'
 
     // 4. EL RESTO DE COSAS
+    implementation 'io.smallrye.config:smallrye-config:3.5.1'
     implementation 'org.eclipse.microprofile.config:microprofile-config-api:3.0'
     implementation 'org.jboss.weld.se:weld-se-core:5.1.2.Final'
 
