@@ -1,15 +1,28 @@
 package com.programacion.avanzada.repository;
 
 import com.programacion.avanzada.modelo.Book;
-import jakarta.data.repository.Repository;
-import java.util.List;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+// IMPORTANTE: Usamos la clase que SÍ aparece en tu imagen
+import jakarta.nosql.document.DocumentTemplate;
 import java.util.Optional;
 
-// "String" es el tipo de dato del @Id
-public interface BookRepository extends Repository<Book, String> {
+@ApplicationScoped
+public class BookRepository {
 
-    // Método personalizado (se crea automático por el nombre)
-    List<Book> findByAuthor(String author);
+    @Inject
+    private DocumentTemplate template;
 
-    // Los métodos save, deleteById, findById, findAll ya vienen incluidos.
+    public Book save(Book book) {
+        // En la versión b7, se usa insert o update
+        return template.insert(book);
+    }
+
+    public Optional<Book> findById(String id) {
+        return template.find(Book.class, id);
+    }
+
+    public void deleteById(String id) {
+        template.delete(Book.class, id);
+    }
 }

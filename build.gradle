@@ -2,29 +2,34 @@ plugins {
     id 'java'
 }
 
-group = 'org.example'
+group = 'com.programacion.avanzada'
 version = '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
+    // SIN ESTO NO FUNCIONA: Aquí vive la librería que borraste
+    maven { url 'https://repo.eclipse.org/content/groups/public/' }
 }
 
 dependencies {
-    // Esta es la que contiene el DocumentCollectionManager que te da error
-    implementation 'org.eclipse.jnosql.databases:jnosql-mongodb:1.0.0'
+    // 1. FORZAMOS LA DESCARGA DE LA API (La que borraste)
+    implementation 'jakarta.nosql:nosql-document:1.0.0-b7'
 
-    implementation 'org.eclipse.microprofile.config:microprofile-config-api:3.1'
+    // 2. Agregamos el CORE también por si acaso
+    implementation 'jakarta.nosql:nosql-core:1.0.0-b7'
+
+    // 3. LA IMPLEMENTACIÓN DE ECLIPSE
+    implementation 'org.eclipse.jnosql.mapping:jnosql-mapping-document:1.1.0'
+    implementation 'org.eclipse.jnosql.databases:jnosql-mongodb:1.1.0'
+
+    // 4. EL RESTO DE COSAS
+    implementation 'org.eclipse.microprofile.config:microprofile-config-api:3.0'
     implementation 'org.jboss.weld.se:weld-se-core:5.1.2.Final'
 
-        // ... tus otras dependencias de JNoSQL y Weld
-
-        // Lombok (Para no escribir getters y setters a mano)
-        compileOnly 'org.projectlombok:lombok:1.18.30'
-        annotationProcessor 'org.projectlombok:lombok:1.18.30'
-
+    compileOnly 'org.projectlombok:lombok:1.18.30'
+    annotationProcessor 'org.projectlombok:lombok:1.18.30'
 }
 
 test {
     useJUnitPlatform()
 }
-
