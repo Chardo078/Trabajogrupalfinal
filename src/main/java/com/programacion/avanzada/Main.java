@@ -22,13 +22,13 @@ public class Main {
             BookRepository repository = container.select(BookRepository.class).get();
 
             System.out.println(">>> CREANDO LIBRO...");
-            Book libro = new Book("2", "El Señor de los Anillos", "J.R.R. Tolkien", 1954);
+            Book libro = new Book("6", "El Señor de los Anillos", "J.R.R. Tolkien", 1954);
 
             repository.save(libro);
             System.out.println(">>> ¡ÉXITO! Libro guardado usando config externa.");
 
             // Leemos para confirmar
-            repository.findById("2").ifPresent(b ->
+            repository.findById("6").ifPresent(b ->
                     System.out.println(">>> CONFIRMADO: " + b.getTitle())
             );
         } catch (Exception e) {
