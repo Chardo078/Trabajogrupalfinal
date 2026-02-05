@@ -5,52 +5,34 @@ import com.programacion.avanzada.repository.BookRepository;
 import jakarta.enterprise.inject.se.SeContainer;
 import jakarta.enterprise.inject.se.SeContainerInitializer;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class Main {
     public static void main(String[] args) {
-        System.out.println(">>> PREPARANDO CONTENEDOR...");
+        System.out.println(">>> INICIANDO SISTEMA (Modo Configuración Separada)...");
 
-        // 1. CONFIGURACIÓN "A LA FUERZA" (Mapa de propiedades)
-        // Reemplaza con tu conexión real de Atlas
-        String mongoUrl = "mongodb+srv://admin:adminp@cluster0.klzmmm6.mongodb.net/biblioteca?appName=Cluster0";
+        // 1. Inicializador LIMPIO (Sin mapas, sin propiedades hardcodeadas)
+        SeContainerInitializer initializer = SeContainerInitializer.newInstance();
 
-        Map<String, Object> config = new HashMap<>();
-        // Ponemos todas las variantes posibles para que JNoSQL no tenga excusa
-        config.put("jnosql.mongodb.url", mongoUrl);
-        config.put("jnosql.document.database", "biblioteca");
-        config.put("jakarta.nosql.document.database", "biblioteca"); // Variante nueva
-        config.put("jnosql.mongodb.database", "biblioteca");
+        // Obligamos a escanear tus paquetes (Truco para evitar errores de visibilidad)
+        initializer.addPackages(true, Main.class);
 
-        try {
-            // 2. INICIALIZADOR CON ESCANEO FORZADO
-            SeContainerInitializer initializer = SeContainerInitializer.newInstance();
+        try (SeContainer container = initializer.initialize()) {
+            // Si llega aquí, es que SmallRye leyó el archivo properties con éxito
 
-            // ¡IMPORTANTE! Esto obliga a leer tus clases (Book, Repository)
-            initializer.addPackages(true, Main.class);
-            initializer.setProperties(config);
+            System.out.println(">>> BUSCANDO REPOSITORIO...");
+            BookRepository repository = container.select(BookRepository.class).get();
 
-            try (SeContainer container = initializer.initialize()) {
-                System.out.println(">>> CONTENEDOR INICIADO. BUSCANDO REPOSITORIO...");
+            System.out.println(">>> CREANDO LIBRO...");
+            Book libro = new Book("2", "El Señor de los Anillos", "J.R.R. Tolkien", 1954);
 
-                // 3. Intentamos obtener el repositorio
-                BookRepository repository = container.select(BookRepository.class).get();
+            repository.save(libro);
+            System.out.println(">>> ¡ÉXITO! Libro guardado usando config externa.");
 
-                System.out.println(">>> REPOSITORIO ENCONTRADO. GUARDANDO LIBRO...");
-
-                Book libro = new Book("1", "Harry Potter", "J.K. Rowling", 1997);
-                repository.save(libro);
-
-                System.out.println(">>> ¡ÉXITO TOTAL! Libro guardado en MongoDB Atlas.");
-
-                // Verificación
-                repository.findById("1").ifPresent(b ->
-                        System.out.println(">>> LEÍDO DE LA DB: " + b.getTitle())
-                );
-            }
+            // Leemos para confirmar
+            repository.findById("2").ifPresent(b ->
+                    System.out.println(">>> CONFIRMADO: " + b.getTitle())
+            );
         } catch (Exception e) {
-            System.err.println(">>> ERROR CRÍTICO:");
+            System.err.println(">>> ERROR: No se pudo leer la configuración o conectar a la DB.");
             e.printStackTrace();
         }
     }
