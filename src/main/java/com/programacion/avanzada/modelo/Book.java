@@ -3,8 +3,12 @@ package com.programacion.avanzada.modelo; // Asegúrate de que el paquete sea co
 import jakarta.nosql.Column;
 import jakarta.nosql.Entity;
 import jakarta.nosql.Id;
-import java.io.Serializable;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.io.Serializable;
+@Getter
+@Setter
 @Entity
 public class Book implements Serializable {
 
@@ -32,18 +36,6 @@ public class Book implements Serializable {
         this.year = year;
     }
 
-    // 3. Getters y Setters manuales (Porque Lombok falló)
-    public String getId() { return id; }
-    public void setId(String id) { this.id = id; }
-
-    public String getTitle() { return title; }
-    public void setTitle(String title) { this.title = title; }
-
-    public String getAuthor() { return author; }
-    public void setAuthor(String author) { this.author = author; }
-
-    public int getYear() { return year; }
-    public void setYear(int year) { this.year = year; }
 
     @Override
     public String toString() {

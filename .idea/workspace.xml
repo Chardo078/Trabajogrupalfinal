@@ -5,7 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2fa81786-07c3-4981-bb4b-d286ab7d979b" name="Changes" comment="update 4-2">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/programacion/avanzada/repository/BookRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/programacion/avanzada/repository/BookRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/programacion/avanzada/modelo/Author.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/programacion/avanzada/modelo/Customer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/programacion/avanzada/modelo/Inventory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/programacion/avanzada/modelo/LineItem.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/programacion/avanzada/modelo/PurchaseOrder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/programacion/avanzada/repository/AuthorRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/programacion/avanzada/repository/CustomerRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/programacion/avanzada/repository/InventoryRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/programacion/avanzada/repository/PurchaseOrderRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/programacion/avanzada/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/programacion/avanzada/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/programacion/avanzada/modelo/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/programacion/avanzada/modelo/Book.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +41,13 @@
         </projects_view>
       </state>
     </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -168,7 +185,15 @@
       <option name="project" value="LOCAL" />
       <updated>1770263177584</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="update 4-2">
+      <option name="closed" value="true" />
+      <created>1770263550801</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1770263550801</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
